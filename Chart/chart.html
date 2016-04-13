@@ -1,0 +1,120 @@
+<html>
+<head>
+	<title>Chart JS</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: sans-serif;
+			font-size: 12px;
+		}
+
+		h1 {
+			color: #5B90BF;
+		}
+
+		.container {
+			position: relative;
+			padding-top: 5px;
+			width: 600px;
+			height: 80px;
+			margin: 20 auto;
+			border-bottom: 1px solid #eee;
+		}
+
+		.content-name {
+			margin-bottom: 5px;
+		}
+
+		.chart {
+			position: absolute;
+			margin-top: -20px;
+			width: 100%;
+			height: 50px;
+			opacity: 0.3;
+		}
+
+		.chart > canvas {
+			margin-left: 50px;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="./js/Chart.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="content-name">
+			<h1>Name goes here</h1>
+		</div>
+		<div class="content-body">
+			<div class="description">Discription goes here</div>
+			<div class="chart">
+				<canvas class="chart-js" data-order="1"></canvas>
+			</div>
+		</div>		
+	</div>
+
+	<div class="container">
+		<div class="content-name">
+			<h1>Name goes here</h1>
+		</div>
+		<div class="content-body">
+			<div class="description">Discription goes here</div>
+			<div class="chart">
+				<canvas class="chart-js" data-order="2"></canvas>
+			</div>
+		</div>		
+	</div>
+
+	<script type="text/javascript">
+	var dataSet1 = {
+    	labels: ["", "", "", "", "", "", "", "", "", "", "","", "", "", "", "", "","", "", "", "", ""],
+    	datasets: [
+        {
+            fillColor: "rgba(220,220,220,0.5)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            data: [65, 59, 80, 81, 56, 55, 40, 59, 80, 81, 56,40, 59, 80, 81, 56, 56,40, 59, 80, 81, 56]
+        }
+    	]
+	};
+
+	var dataSet2 = {
+    	labels: ["", "", "", "", "", "", "", "", "", "", "","", "", "", "", "", "","", "", "", "", ""],
+    	datasets: [
+        {
+            fillColor: "rgba(220,220,220,0.5)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            data: [65, 59, 80, 81, 56, 55, 56,40, 59, 80, 81, 56, 40, 59, 80, 81, 56,40, 59, 80, 81, 56]
+        }
+    	]
+	};
+
+	var options = {
+		 showScale: false,
+		 animation: false,
+		 reponsive: true,
+		 showTooltips: false,
+		 barShowStroke : false,
+		 barValueSpacing : 2,
+	}
+
+		$('.chart-js').each(function(index, element){
+			var dataOrder = $(this).attr('data-order');
+			var ctx = element.getContext("2d");
+			ctx.canvas.height = 50;
+			ctx.canvas.width = 500;
+
+			if (dataOrder == 1) {
+				var chart = new Chart(ctx).Bar(dataSet1, options);
+			}
+			else if (dataOrder == 2)
+			{
+				var chart = new Chart(ctx).Bar(dataSet2, options);
+			}
+		});
+	</script>
+</body>
+</html>
